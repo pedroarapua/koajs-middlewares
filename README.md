@@ -1,4 +1,4 @@
-# koajs-middleares
+# koajs-middlewares
 #### Módulo com middlewares para serem utilizados com koajs
 
 ---
