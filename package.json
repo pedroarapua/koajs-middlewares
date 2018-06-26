@@ -18,16 +18,60 @@
   "author": "Pedro Henrique F. Dias",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "babel-register": "^6.26.0",
     "bunyan": "^1.8.12",
     "bunyan-logstash-tcp": "^1.0.0",
+    "chai": "^4.1.2",
     "coveralls": "^3.0.1",
     "husky": "^0.14.3",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "mocha": "^5.2.0",
     "nyc": "^12.0.2",
+    "sinon": "^6.0.1",
     "snazzy": "^7.1.1",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "supertest": "^3.1.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedroarapua/koajs-middlewares"
+  },
+  "keywords": [
+    "koa2",
+    "middlewares",
+    "logging",
+    "response-time"
+  ],
+  "engines": {
+    "node": "8.11.3",
+    "npm": "6.1.0"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "it",
+      "test",
+      "beforeEach",
+      "afterEach"
+    ]
+  },
+  "nyc": {
+    "include": [
+      "./**/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "exclude": [
+      "packages/**/*"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "all": false
+  }
 }

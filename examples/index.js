@@ -47,3 +47,8 @@ app.listen(3001, '0.0.0.0', (err) => {
 
   console.log('Server is available on http://localhost:3001')
 })
+
+module.exports = {
+  app,
+  logger
+}
