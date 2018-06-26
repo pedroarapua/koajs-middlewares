@@ -1,19 +1,33 @@
 {
-  "name": "koajs-middlewares",
-  "version": "0.0.1",
+  "name": "koajs2-middlewares",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm run lint && NODE_CONFIG_DIR=./src/config NODE_ENV=test nyc npm run test-mocha",
+    "test-mocha": "NODE_CONFIG_DIR=./src/config NODE_ENV=test mocha --harmony --exit ./**/*.spec.js",
+    "test-mocha-watch": "NODE_CONFIG_DIR=./src/config NODE_ENV=test mocha --watch --harmony ./**/*.spec.js",
+    "precommit": "npm run git-hook",
+    "prepush": "npm run git-hook",
+    "git-hook": "npm run lint -s && npm run test -s",
+    "lint": "standard --verbose | snazzy",
+    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "fixcode": "standard --fix",
+    "coverage": "NODE_ENV=test nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Pedro Henrique F. Dias",
   "license": "ISC",
   "devDependencies": {
     "bunyan": "^1.8.12",
     "bunyan-logstash-tcp": "^1.0.0",
+    "coveralls": "^3.0.1",
+    "husky": "^0.14.3",
     "koa": "^1.6.0",
     "koa-bodyparser": "^2.5.0",
-    "koa-router": "^5.4.2"
+    "koa-router": "^5.4.2",
+    "nyc": "^12.0.2",
+    "snazzy": "^7.1.1",
+    "standard": "^11.0.1"
   },
   "dependencies": {
     "lodash": "^4.17.10"
