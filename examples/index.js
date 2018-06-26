@@ -1,9 +1,11 @@
 const path = require('path')
-const app = require('koa')()
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const pkg = require('../package.json')
-const { KoaBunyanLogger, KoaHeaderResponseTime } = require('../libs')
+const { KoaBunyanLogger, KoaHeaderResponseTime } = require('../')
+
+const Koa = require('koa')
+const app = new Koa()
 
 const bunyan = require('bunyan')
 const logger = bunyan.createLogger({
@@ -28,9 +30,9 @@ const logger = bunyan.createLogger({
 })
 
 const router = new Router()
-router.get('/', function * () {
-  this.body = { teste: 123 }
-  this.status = 200
+router.get('/', async (ctx) => {
+  ctx.body = { teste: 123 }
+  ctx.status = 200
 })
 
 app

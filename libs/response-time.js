@@ -1,7 +1,9 @@
-'use strict'
-module.exports = function * (next) {
+module.exports = async (ctx, next) => {
   const startDate = new Date()
-  yield next
+
+  await next()
+
   const ms = new Date() - startDate
-  this.set('X-Response-Time', `${ms}ms`)
+
+  ctx.set('X-Response-Time', `${ms}ms`)
 }

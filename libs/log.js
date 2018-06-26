@@ -1,22 +1,22 @@
-module.exports = function (bunyanLogger) {
-  return function * (next) {
+module.exports = (bunyanLogger) => {
+  return async (ctx, next) => {
     const startDate = new Date()
 
-    yield next
+    await next()
 
     const endDate = new Date()
     const latency = parseFloat(parseFloat((endDate - startDate) / 1000).toFixed(3))
-    let log = {
+    const log = {
       'http.lantency_seconds': latency,
-      'path': this.path,
-      'http.request_body': typeof (this.request.body) === 'string' ? this.request.body : JSON.stringify(this.request.body),
-      'http.request_header': JSON.stringify(this.request.headers),
-      'http.request_method': this.request.method,
-      'http.response_body': typeof (this.response.body) === 'string' ? this.response.body : JSON.stringify(this.response.body),
-      'http.response_header': JSON.stringify(this.response.headers),
+      'path': ctx.path,
+      'http.request_body': typeof (ctx.request.body) === 'string' ? ctx.request.body : JSON.stringify(ctx.request.body),
+      'http.request_header': JSON.stringify(ctx.request.headers),
+      'http.request_method': ctx.request.method,
+      'http.response_body': typeof (ctx.response.body) === 'string' ? ctx.response.body : JSON.stringify(ctx.response.body),
+      'http.response_header': JSON.stringify(ctx.response.headers),
       'http.request_size': 1,
-      'http.status_code': this.response.status,
-      'http.url': this.request.href,
+      'http.status_code': ctx.response.status,
+      'http.url': ctx.request.href,
       'type': 'json'
     }
 
