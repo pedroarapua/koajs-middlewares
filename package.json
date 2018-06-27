@@ -36,7 +36,11 @@
     "supertest": "^3.1.0"
   },
   "release": {
-    "branch": "master"
+    "branches": {
+      "0x":  "0.x.x",
+      "master":  "2.x.x",
+      "next": "x.x.x"
+    }
   },
   "publishConfig": {
     "tag": "latest"
