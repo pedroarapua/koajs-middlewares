@@ -37,8 +37,8 @@
   },
   "release": {
     "branches": {
-      "0x":  "0.x.x",
-      "master":  "2.x.x",
+      "0x": "0.x.x",
+      "master": "2.x.x",
       "next": "x.x.x"
     }
   },

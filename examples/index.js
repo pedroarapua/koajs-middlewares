@@ -2,7 +2,7 @@ const path = require('path')
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const pkg = require('../package.json')
-const { KoaBunyanLogger, KoaHeaderResponseTime } = require('../')
+const { KoaBunyanLogger, KoaHeaderResponseTime, KoaParseSequelize } = require('../')
 
 const Koa = require('koa')
 const app = new Koa()
@@ -39,6 +39,7 @@ app
   .use(bodyParser())
   .use(KoaBunyanLogger(logger))
   .use(KoaHeaderResponseTime)
+  .use(KoaParseSequelize)
   .use(router.routes())
   .use(router.allowedMethods())
 
