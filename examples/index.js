@@ -3,8 +3,9 @@ const app = require('koa')(),
   bodyParser = require('koa-bodyparser'),
   Router = require('koa-router'),
   pkg = require('../package.json'),
+  newrelic = require('newrelic'),
   _ = require('lodash'),
-  { KoaBunyanLogger, KoaHeaderResponseTime, KoaParseSequelize } = require('../libs');
+  { KoaBunyanLogger, KoaHeaderResponseTime, KoaParseSequelize, KoaNewRelic } = require('../libs');
 
 
 const bunyan = require('bunyan');
@@ -37,6 +38,7 @@ router.get('/', function * () {
 
 app
   .use(bodyParser())
+  .use(KoaNewRelic(newrelic))
   .use(KoaBunyanLogger(logger))
   .use(KoaHeaderResponseTime)
   .use(KoaParseSequelize)
