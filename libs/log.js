@@ -2,7 +2,6 @@
 module.exports = function (bunyanLogger) {
   return function * (next) {
     const startDate = new Date();
-    let error;
     
     yield next;
     

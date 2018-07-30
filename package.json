@@ -23,6 +23,7 @@
     "newrelic": "^4.5.1",
     "raven": "^2.6.3",
     "request": "^2.87.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "jsonwebtoken": "^8.3.0"
   }
 }

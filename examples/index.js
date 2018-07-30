@@ -14,7 +14,8 @@ const app = require('koa')(),
     KoaParseSequelize, 
     KoaNewRelic,
     KoaError,
-    KoaSentry } = require('../libs');
+    KoaSentry,
+    KoaJwt } = require('../libs');
 
 
 const bunyan = require('bunyan');
@@ -39,19 +40,6 @@ KoaSentry.init(app, config.sentry.url, {
 
 const router = new Router();
 router.get('/', function * () {
-  var options = {
-    uri: 'http://ec2-34-238-40-130.compute-1.amazonaws.com:3000/app/v1/users/1',
-    headers: {
-      'User-Agent': 'Request-Promise'
-    },
-    json: true, 
-    timeout: 5000,
-    resolveWithFullResponse: true
-  };
-
-  let html = yield rp(options)
-    .then(resp => KoaSentry.setContextApi('congrega-api', options, resp))
-    .catch(err => KoaSentry.setContextApi('congrega-api', options, err))
 
   throw new Error('boba');
 
@@ -68,6 +56,7 @@ app
   .use(KoaError)
   .use(KoaSentry.errorOriginalHandler)
   .use(KoaParseSequelize)
+  .use(KoaJwt({ secret: process.env['JWT_SECRET'] }))
   .use(router.routes())
   .use(router.allowedMethods());
 
