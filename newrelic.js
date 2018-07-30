@@ -12,22 +12,18 @@
  *     * description of configuration variables and their potential values.
  *      */
 exports.config = {
-  capture_params: true,
-  agent_enabled: false,
-  /**
- *    * Array of application names.
- *       */
+  attributes: {
+    enabled: true
+  },
+  agent_enabled: process.env['NEWRELIC_ENABLED'] == 'true' || false,
   app_name : ['koajs-middlewares'],
-  /**
- *    * Your New Relic license key.
- *       */
-  license_key : '#key#',
+  license_key : process.env['NEWRELIC_ENABLED'] == 'true' ? process.env['NEWRELIC_LICENSE_KEY'] : '#key#',
   logging : {
     level : 'info',
-    filepath: './logs/newrelic_agent.log'
+    filepath: __dirname + '/logs/newrelic_agent.log'
   },
   error_collector: {
-    ignore_status_codes: []
+    ignore_status_codes: [404, 401, 400]
   }
 };
 
