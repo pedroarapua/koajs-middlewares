@@ -53,7 +53,7 @@ router.get('/', function * () {
     .then(resp => KoaSentry.setContextApi('congrega-api', options, resp))
     .catch(err => KoaSentry.setContextApi('congrega-api', options, err))
 
-  throw new Error('bobo');
+  throw new Error('boba');
 
   this.body = { teste: 123 };
   this.status = 200;
@@ -66,6 +66,7 @@ app
   .use(KoaBunyanLogger(logger))
   .use(KoaSentry.errorHandler())
   .use(KoaError)
+  .use(KoaSentry.errorOriginalHandler)
   .use(KoaParseSequelize)
   .use(router.routes())
   .use(router.allowedMethods());

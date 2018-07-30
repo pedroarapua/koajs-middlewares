@@ -1,5 +1,4 @@
 'use strict';
-const Boom = require('boom');
 const Raven = require('raven');
 const pick = require('lodash/pick');
 
@@ -23,6 +22,15 @@ module.exports = {
     };
   
     Raven.captureBreadcrumb(log);
+  },
+  errorOriginalHandler: function* (next) {
+    try {
+      yield next;
+    }
+    catch(err) {
+      this._sentryError = err;
+      throw err;
+    }
   },
   errorHandler: (array = [500, 501, 502, 503, 504]) => {
     return function* (next) {

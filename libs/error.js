@@ -10,7 +10,6 @@ module.exports = function *(next){
       this.throw(404);  
     }
   } catch (err) {
-    this._sentryError = err;
     this.status = err.isJoi ? 400 : err.isBoom ? err.output.statusCode : (err.status || 500);
     this.body = err.isBoom ? err.output.payload : Boom.boomify(err, { statusCode: this.status }).output.payload;
     if(err.isJoi) {
