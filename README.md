@@ -17,7 +17,7 @@
 ---
 
 ## Instalação
-* npm install koajs-middlwares --save
+* npm install koajs-middlewares --save
 
 ---
 
